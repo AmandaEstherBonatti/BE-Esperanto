@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ClientsModule } from './app/client/clients.module';
 import { AddressModule } from './app/address/adress.module';
+import { DoctorsModule } from './app/doctor/doctors.module';
+import { UsersModule } from './app/user/users.module';
+import { FormationsModule } from './app/formation/formations.module';
 
 @Module({
   imports: [
@@ -17,9 +20,9 @@ import { AddressModule } from './app/address/adress.module';
       database: process.env.TYPEORM_DATABASE,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
-    } as TypeOrmModuleOptions), ClientsModule, AddressModule
+    } as TypeOrmModuleOptions), ClientsModule, AddressModule, DoctorsModule, UsersModule, FormationsModule
   ],
   controllers: [],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

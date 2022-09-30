@@ -35,9 +35,17 @@ export class AuthService {
   }
 
   verifyToken(jwt: any) {
-    const verify = this.jwtService.verify(jwt);
-    if (verify) {
-      return true;
-    }
+    const verify = this.jwtService.verify(jwt, {
+      secret: process.env.JWT_SECRET_KEY,
+    });
+    return verify ? true : false;
+
+  }
+
+  decodeToken(jwt: any) {
+    const verifyToken = this.jwtService.verify(jwt, {
+      secret: process.env.JWT_SECRET_KEY,
+    });
+    return verifyToken ?? null;
   }
 }

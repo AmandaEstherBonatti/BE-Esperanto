@@ -8,8 +8,12 @@ import {
     UpdateDateColumn,
     DeleteDateColumn,
     OneToOne,
-    JoinColumn
+    JoinColumn,
+    OneToMany
 } from 'typeorm';
+import { DoctorsEntity } from '../doctor/doctors.entity';
+import { Role } from './enum/role.enum';
+import { FeedPostEntity } from '../feed/feeds.entity';
 
 @Entity()
 export class UsersEntity {
@@ -23,7 +27,17 @@ export class UsersEntity {
     @Column()
     password: string
 
-    @OneToOne(() => ClientEntity, (client) => client.User, {nullable: true})
+    @Column({ type: 'enum', enum: Role, default: Role.USER })
+    role: Role;
+
+
+    @OneToOne(() => ClientEntity, (client) => client.User, { nullable: true })
     Client: ClientEntity
+
+    @OneToOne(() => DoctorsEntity, (doctor) => doctor.User, { nullable: true })
+    Doctor: DoctorsEntity
+
+    @OneToMany(() => FeedPostEntity, (feedPostEntity) => feedPostEntity.User, { nullable: true })
+    feedPosts: FeedPostEntity[];
 
 }
