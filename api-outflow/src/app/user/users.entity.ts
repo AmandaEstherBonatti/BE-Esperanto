@@ -9,12 +9,16 @@ import {
     DeleteDateColumn,
     OneToOne,
     JoinColumn,
-    OneToMany
+    OneToMany,
+    ManyToMany
 } from 'typeorm';
 import { DoctorsEntity } from '../doctor/doctors.entity';
 import { Role } from './enum/role.enum';
 import { FeedPostEntity } from '../feed/feeds.entity';
 import { hashSync } from 'bcrypt';
+import { ConversationEntity } from '../chat/entitys/conversation.entity';
+import { MessageEntity } from '../chat/entitys/message.entity';
+import { FriendRequestEntity } from '../friend-request/friend-request.entity';
 
 @Entity()
 export class UsersEntity {
@@ -41,6 +45,27 @@ export class UsersEntity {
     @OneToMany(() => FeedPostEntity, (feedPostEntity) => feedPostEntity.User, { nullable: true })
     feedPosts: FeedPostEntity[];
 
+    @ManyToMany(
+        () => ConversationEntity,
+        (conversationEntity) => conversationEntity.Users,
+    )
+    Conversations: ConversationEntity[];
+
+
+    @OneToMany(() => MessageEntity, (messageEntity) => messageEntity.User)
+    Messages: MessageEntity[];
+
+    @OneToMany(
+        () => FriendRequestEntity,
+        (friendRequest) => friendRequest.Creator,
+    )
+    SentFriendRequests: FriendRequestEntity[];
+
+    @OneToMany(
+        () => FriendRequestEntity,
+        (friendRequest) => friendRequest.Receiver,
+    )
+    ReceivedFriendRequests: FriendRequestEntity[];
 
     @BeforeInsert()
     hasPassword() {

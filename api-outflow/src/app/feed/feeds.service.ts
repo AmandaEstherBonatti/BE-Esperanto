@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Get, Injectable, NotFoundException, Param, Res } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   FindManyOptions,
@@ -60,6 +60,8 @@ export class FeedService {
     }
     return await this.feedRepository.softDelete({ id });
   }
+
+
 }
 
 
