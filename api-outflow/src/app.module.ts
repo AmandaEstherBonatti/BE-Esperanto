@@ -7,6 +7,8 @@ import { AddressModule } from './app/address/adress.module';
 import { DoctorsModule } from './app/doctor/doctors.module';
 import { UsersModule } from './app/user/users.module';
 import { FormationsModule } from './app/formation/formations.module';
+import { FeedsModule } from './app/feed/feeds.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { FormationsModule } from './app/formation/formations.module';
       database: process.env.TYPEORM_DATABASE,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
-    } as TypeOrmModuleOptions), ClientsModule, AddressModule, DoctorsModule, UsersModule, FormationsModule
+    } as TypeOrmModuleOptions), ClientsModule, AddressModule, DoctorsModule, UsersModule, FormationsModule, FeedsModule, AuthModule
   ],
   controllers: [],
   providers: [AppService],

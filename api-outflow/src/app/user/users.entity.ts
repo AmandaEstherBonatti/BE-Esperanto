@@ -14,6 +14,7 @@ import {
 import { DoctorsEntity } from '../doctor/doctors.entity';
 import { Role } from './enum/role.enum';
 import { FeedPostEntity } from '../feed/feeds.entity';
+import { hashSync } from 'bcrypt';
 
 @Entity()
 export class UsersEntity {
@@ -27,7 +28,7 @@ export class UsersEntity {
     @Column()
     password: string
 
-    @Column({ type: 'enum', enum: Role, default: Role.USER })
+    @Column({ type: 'enum', enum: Role, default: Role.USER, nullable: true })
     role: Role;
 
 
@@ -40,4 +41,9 @@ export class UsersEntity {
     @OneToMany(() => FeedPostEntity, (feedPostEntity) => feedPostEntity.User, { nullable: true })
     feedPosts: FeedPostEntity[];
 
+
+    @BeforeInsert()
+    hasPassword() {
+        this.password = hashSync(this.password, 10);
+    }
 }
