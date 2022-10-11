@@ -3,6 +3,9 @@ import { AddressEntity } from "../address/address.entity";
 import { Gender } from "../client/enum/gender.enum";
 import { FormationEntity } from "../formation/formations.entity";
 import { UsersEntity } from "../user/users.entity";
+import { KindOfDoctor } from "./enum/kind_of_doctor.enum";
+import { MainExpectation } from "./enum/main-expectation.enum";
+import { TimeExperience } from "./enum/time-experience.enum";
 
 @Entity({ name: 'doctors' })
 export class DoctorsEntity {
@@ -16,8 +19,7 @@ export class DoctorsEntity {
     @Column()
     lastName: string
 
-    @Column()
-    birthday: Date;
+
 
     @Column()
     gender: Gender;
@@ -26,7 +28,19 @@ export class DoctorsEntity {
     phoneNumber: string;
 
     @Column()
-    localClinic: boolean;
+    cpf: string;
+
+    @Column()
+    timeExperience: TimeExperience;
+
+    @Column()
+    mainExpectation: MainExpectation;
+
+    @Column()
+    kindOfDoctor: KindOfDoctor;
+
+    @Column({ nullable: true })
+    crp: string;
 
     @OneToOne(() => AddressEntity, {
         cascade: ['insert', 'update', 'remove'],

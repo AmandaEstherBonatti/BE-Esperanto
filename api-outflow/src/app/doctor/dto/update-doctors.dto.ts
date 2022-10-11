@@ -18,8 +18,6 @@ export class UpdateDoctorDto {
    @IsString()
    lastName: string;
 
-   @IsOptional()
-   birthday: Date;
 
    @IsOptional()
    gender: Gender;
