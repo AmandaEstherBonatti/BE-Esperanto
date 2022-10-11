@@ -18,9 +18,8 @@ import { FeedPostEntity } from '../feed/feeds.entity';
 import { hashSync } from 'bcrypt';
 import { ConversationEntity } from '../chat/entitys/conversation.entity';
 import { MessageEntity } from '../chat/entitys/message.entity';
-import { FriendRequestEntity } from '../friend-request/friend-request.entity';
 
-@Entity()
+@Entity({ name: 'users' })
 export class UsersEntity {
 
     @PrimaryGeneratedColumn('uuid')
@@ -32,7 +31,7 @@ export class UsersEntity {
     @Column()
     password: string
 
-    @Column({ type: 'enum', enum: Role, default: Role.USER, nullable: true })
+    @Column()
     role: Role;
 
 
@@ -48,24 +47,27 @@ export class UsersEntity {
     @ManyToMany(
         () => ConversationEntity,
         (conversationEntity) => conversationEntity.Users,
+        { nullable: true }
     )
     Conversations: ConversationEntity[];
 
 
-    @OneToMany(() => MessageEntity, (messageEntity) => messageEntity.User)
+    @OneToMany(() => MessageEntity, (messageEntity) => messageEntity.User, { nullable: true })
     Messages: MessageEntity[];
 
-    @OneToMany(
-        () => FriendRequestEntity,
-        (friendRequest) => friendRequest.Creator,
-    )
-    SentFriendRequests: FriendRequestEntity[];
+    // @OneToMany(
+    //     () => FriendRequestEntity,
+    //     (friendRequest) => friendRequest.Creator,
+    //     { nullable: true }
+    // )
+    // SentFriendRequests: FriendRequestEntity[];
 
-    @OneToMany(
-        () => FriendRequestEntity,
-        (friendRequest) => friendRequest.Receiver,
-    )
-    ReceivedFriendRequests: FriendRequestEntity[];
+    // @OneToMany(
+    //     () => FriendRequestEntity,
+    //     (friendRequest) => friendRequest.Receiver,
+    //     { nullable: true }
+    // )
+    // ReceivedFriendRequests: FriendRequestEntity[];
 
     @BeforeInsert()
     hasPassword() {

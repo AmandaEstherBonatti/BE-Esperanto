@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UsersEntity } from "../user/users.entity";
 
-@Entity()
+@Entity({ name: 'feed_post' })
 export class FeedPostEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;

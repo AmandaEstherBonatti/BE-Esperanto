@@ -13,7 +13,7 @@ import { AddressEntity } from '../address/address.entity';
 import { UsersEntity } from '../user/users.entity';
 import { Gender } from './enum/gender.enum';
 
-@Entity()
+@Entity({ name: 'clients' })
 export class ClientEntity {
 
   @PrimaryGeneratedColumn('uuid')
@@ -49,5 +49,5 @@ export class ClientEntity {
   })
   @JoinColumn()
   User: UsersEntity;
-  
+
 }

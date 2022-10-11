@@ -9,6 +9,7 @@ import { UsersModule } from './app/user/users.module';
 import { FormationsModule } from './app/formation/formations.module';
 import { FeedsModule } from './app/feed/feeds.module';
 import { AuthModule } from './auth/auth.module';
+import { SnakeNamingStrategy } from 'typeorm-snake-naming-strategy';
 
 @Module({
   imports: [

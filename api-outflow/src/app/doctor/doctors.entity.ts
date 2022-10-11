@@ -4,7 +4,7 @@ import { Gender } from "../client/enum/gender.enum";
 import { FormationEntity } from "../formation/formations.entity";
 import { UsersEntity } from "../user/users.entity";
 
-@Entity()
+@Entity({ name: 'doctors' })
 export class DoctorsEntity {
 
     @PrimaryGeneratedColumn('uuid')

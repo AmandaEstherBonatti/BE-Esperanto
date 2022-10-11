@@ -10,7 +10,7 @@ import {
 import { ClientEntity } from '../client/clients.entity';
 import { DoctorsEntity } from '../doctor/doctors.entity';
 
-@Entity()
+@Entity({ name: 'address' })
 export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

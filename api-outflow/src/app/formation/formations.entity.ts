@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn
 import { DoctorsEntity } from "../doctor/doctors.entity";
 
 
-@Entity()
+@Entity({ name: 'formations' })
 export class FormationEntity {
 
     @PrimaryGeneratedColumn('uuid')
